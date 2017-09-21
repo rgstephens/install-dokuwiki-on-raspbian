@@ -1,6 +1,6 @@
 #!/bin/sh
 
-HOSTNAME=doku.yourdomain.com
+HOSTNAME=localhost
 PORT=80
 SITEDIR=doku
 USER=ubuntu
