@@ -14,7 +14,7 @@ USER=www-data
 sudo apt-get update -y && apt-get upgrade
 
 #install nginx web server
-sudo apt-get install nginx php5-fpm php5-cli php5-mcrypt php5-gd -y
+sudo apt-get install nginx php-fpm php-cli php-mcrypt php-gd php-xml -y
 
 #move to the home directory
 cd
