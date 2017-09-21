@@ -11,10 +11,10 @@ USER=www-data
 #git clone https://github.com/catonrug/install-dokuwiki-on-raspbian.git && cd install-dokuwiki-on-raspbian && chmod +x install.sh && ./install.sh
 
 #update all repositories and install latest updates
-apt-get update -y && apt-get upgrade
+sudo apt-get update -y && apt-get upgrade
 
 #install nginx web server
-apt-get install nginx php5-fpm php5-cli php5-mcrypt php5-gd -y
+sudo apt-get install nginx php5-fpm php5-cli php5-mcrypt php5-gd -y
 
 #move to the home directory
 cd
@@ -26,7 +26,7 @@ wget http://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz -O dokuwiki.t
 tar -xvf dokuwiki.tgz
 
 #set up nginx  
-cat > /etc/nginx/sites-available/$SITEDIR << EOF
+sudo cat > /etc/nginx/sites-available/$SITEDIR << EOF
 server {
 server_name $HOSTNAME;
 listen $PORT;
@@ -52,19 +52,19 @@ fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
 EOF
 
 #make symbolic limk
-ln -s /etc/nginx/sites-available/$SITEDIR /etc/nginx/sites-enabled/$SITEDIR
+sudo ln -s /etc/nginx/sites-available/$SITEDIR /etc/nginx/sites-enabled/$SITEDIR
 
 #restart nginx server
-/etc/init.d/nginx restart
+sudo /etc/init.d/nginx restart
 
 #make direcotry
-mkdir -p /var/www/$SITEDIR
+sudo mkdir -p /var/www/$SITEDIR
 
 #move to extracted content
-cd ~/dokuwiki-*
+sudo cd ~/dokuwiki-*
 
 #copy all content to your domain directory
-cp -a . /var/www/$SITEDIR
+sudo cp -a . /var/www/$SITEDIR
 
 #let nginx operate with this content
-chown -R $USER:$USER /var/www/$SITEDIR
+sudo chown -R $USER:$USER /var/www/$SITEDIR
