@@ -1,5 +1,10 @@
 #!/bin/sh
 
+HOSTNAME=doku.yourdomain.com
+PORT=80
+SITEDIR=doku
+USER=ubuntu
+
 #this is tested 2016-03-18-raspbian-jessie-lite.img
 #sudo apt-get update -y && sudo apt-get upgrade -y
 #sudo apt-get install git -y
@@ -21,13 +26,13 @@ wget http://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz -O dokuwiki.t
 tar -xvf dokuwiki.tgz
 
 #set up nginx  
-cat > /etc/nginx/sites-available/yourdomain.com << EOF
+cat > /etc/nginx/sites-available/$SITEDIR << EOF
 server {
-server_name yourdomain.com;
-listen 80;
-root /var/www/yourdomain.com/;
-access_log /var/log/nginx/yourdomain.com-access.log;
-error_log /var/log/nginx/yourdomain.com-error.log;
+server_name $HOSTNAME;
+listen $PORT;
+root /var/www/${DOMAIN}/;
+access_log /var/log/nginx/$SITEDIR-access.log;
+error_log /var/log/nginx/$SITEDIR-error.log;
 
 index index.php index.html doku.php;
 location ~ /(data|conf|bin|inc)/ {
@@ -47,19 +52,19 @@ fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
 EOF
 
 #make symbolic limk
-ln -s /etc/nginx/sites-available/yourdomain.com /etc/nginx/sites-enabled/yourdomain.com
+ln -s /etc/nginx/sites-available/$SITEDIR /etc/nginx/sites-enabled/$SITEDIR
 
 #restart nginx server
 /etc/init.d/nginx restart
 
 #make direcotry
-mkdir -p /var/www/yourdomain.com
+mkdir -p /var/www/$SITEDIR
 
 #move to extracted content
 cd ~/dokuwiki-*
 
 #copy all content to your domain directory
-cp -a . /var/www/yourdomain.com
+cp -a . /var/www/$SITEDIR
 
 #let nginx operate with this content
-chown -R www-data:www-data /var/www/yourdomain.com
+chown -R $USER:$USER /var/www/$SITEDIR
