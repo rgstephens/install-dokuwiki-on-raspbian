@@ -3,7 +3,7 @@
 HOSTNAME=localhost
 PORT=80
 SITEDIR=doku
-USER=ubuntu
+USER=www-data
 
 #this is tested 2016-03-18-raspbian-jessie-lite.img
 #sudo apt-get update -y && sudo apt-get upgrade -y
