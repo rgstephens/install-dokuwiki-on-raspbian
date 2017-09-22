@@ -1,7 +1,7 @@
 
 ## nginx config file
 
-Setup instructions from [here](https://www.nginx.com/resources/wiki/start/topics/recipes/dokuwiki/)
+Setup instructions from [here](https://www.nginx.com/resources/wiki/start/topics/recipes/dokuwiki/) and the official one [here](https://www.dokuwiki.org/install:nginx)
 
 ## Permissions
 
