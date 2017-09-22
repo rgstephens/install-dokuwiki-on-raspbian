@@ -1,6 +1,6 @@
 server {
   server_name 127.0.0.1;
-  listen 127.0.0.1:82;
+  listen 127.0.0.1:81;
   root /var/www/doku/;
   
   access_log /var/log/nginx/doku-access.log;
